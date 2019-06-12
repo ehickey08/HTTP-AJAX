@@ -1,14 +1,29 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Friend = props => {
-    return (
-        <FriendDiv>
-            <FriendSpan>Name: {props.data.name}</FriendSpan>
-            <FriendSpan>Age: {props.data.age}</FriendSpan>
-            <FriendSpan>Email: {props.data.email}</FriendSpan>
-        </FriendDiv>
-    )
+
+
+class Friend extends React.Component {
+
+    deleteFriend = e => {
+        console.log(this.props.friend.id)
+        e.preventDefault();
+        this.props.deleteFriend(this.props.friend.id)
+    }
+
+    render(){
+        return (
+            <>
+                <FriendDiv>
+                    <FriendSpan>Name: {this.props.friend.name}</FriendSpan>
+                    <FriendSpan>Age: {this.props.friend.age}</FriendSpan>
+                    <FriendSpan>Email: {this.props.friend.email}</FriendSpan>
+                </FriendDiv>
+                <UpdateButton onClick = {() => this.props.updateForm(this.props.friend)}>Update</UpdateButton>
+                <DeleteButton onClick ={(evt) => this.deleteFriend(evt)}>Delete</DeleteButton>
+            </>
+        )
+    }
 }
 
 const FriendDiv = styled.div`
@@ -19,5 +34,12 @@ const FriendDiv = styled.div`
 
 const FriendSpan = styled.span`
     margin: 0.22rem 0;
+`
+
+const UpdateButton = styled.button`
+
+`
+
+const DeleteButton = styled(UpdateButton)`
 `
 export default Friend

@@ -3,6 +3,7 @@ import axios from 'axios'
 import styled from 'styled-components';
 
 import Friend from './components/Friend';
+import FriendForm from './components/FriendForm';
 
 class App extends React.Component {
     state = {
@@ -43,8 +44,15 @@ class App extends React.Component {
             .catch(err => console.log(err))
     }
 
-    updateFriend = id => {
-        axios.put(`http://localhost:5000/friends/${id}`)
+    updateForm = friend => {
+        this.setState({
+            friend
+        })
+    }
+
+    updateFriend = friend => {
+        console.log('update')
+        axios.put(`http://localhost:5000/friends/${friend.id}`, friend)
             .then(res => {
                 this.setState({
                     data:res.data
@@ -52,37 +60,32 @@ class App extends React.Component {
             })
             .catch(err => console.log(err))
     }
+
+    deleteFriend = id => {
+        axios.delete(`http://localhost:5000/friends/${id}`)
+            .then(res => {
+                this.setState({
+                    data: res.data
+                })
+            })
+            .catch(err => console.log(err))
+    }
+
     render() {
         return (
             <AppDiv>
-                {this.state.data.map(friend => <Friend data = {friend} />)}
-                <FormDiv onSubmit = {() => this.postFriend(this.state.friend)}>
-                    <input
-                        type="text"
-                        name="name" 
-                        onChange = {this.handleChanges}
-                        value = {this.state.friend.name}
-                        placeholder = "Name"
+                <FriendForm 
+                    handler = {this.handleChanges} 
+                    postFriend = {this.postFriend}
+                    updateFriend = {this.updateFriend}
+                    friends = {this.state.data}
+                    friend = {this.state.friend}
                     />
-                    <input 
-                        type="text"
-                        name="age" 
-                        onChange = {this.handleChanges}
-                        value = {this.state.friend.age}
-                        placeholder = "Age"
-                    />
-                    <input
-                        type="text" 
-                        name="email" 
-                        onChange = {this.handleChanges}
-                        value = {this.state.friend.email}
-                        placeholder = "Email"
-                    />
-                    <input 
-                        type="submit"
-                        value="Submit"
-                    />
-                </FormDiv>
+                    {this.state.data.map(friend => 
+                        <Friend  
+                            updateForm = {this.updateForm} 
+                            deleteFriend = {this.deleteFriend} 
+                            friend = {friend} />)}
             </AppDiv>
         );
     }
@@ -92,10 +95,6 @@ const AppDiv = styled.div`
     text-align: center;
     width: 1000px;
     margin: 0 auto;
-`
-
-const FormDiv = styled.form`
-   
 `
 
 export default App;
