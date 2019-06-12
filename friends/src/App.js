@@ -55,7 +55,12 @@ class App extends React.Component {
         axios.put(`http://localhost:5000/friends/${friend.id}`, friend)
             .then(res => {
                 this.setState({
-                    data:res.data
+                    data:res.data,
+                    friend: {
+                        name: '',
+                        age: '',
+                        email: ''
+                    }
                 })
             })
             .catch(err => console.log(err))
