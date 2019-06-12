@@ -32,6 +32,7 @@ const FriendForm = props => {
                 placeholder = "Email"
             />
             <input 
+                className = "submit"
                 type="submit"
                 value="Submit"
             />
@@ -40,7 +41,30 @@ const FriendForm = props => {
 }
 
 const FormDiv = styled.form`
-   
+    width: 30%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 200px
+
+    input{
+        height: 15%;
+        padding: 5px;
+        border-radius: 5px;
+        border-width: 1px;
+    }
+    
+    input.submit{
+        background: #0B2818
+        color: white;
+        
+        &:hover{
+            background: rgba(66,94,78, 0.4);
+            font-weight: 600;
+            color: black;
+        }
+    }
 `
 
 export default FriendForm

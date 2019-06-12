@@ -74,6 +74,7 @@ class App extends React.Component {
     render() {
         return (
             <AppDiv>
+                <h1>Add, Update, and Delete Your Friends!</h1>
                 <FriendForm 
                     handler = {this.handleChanges} 
                     postFriend = {this.postFriend}
@@ -94,7 +95,13 @@ class App extends React.Component {
 const AppDiv = styled.div`
     text-align: center;
     width: 1000px;
-    margin: 0 auto;
+    margin: 100px auto;
+    background: white;
+    padding-bottom: 50px;
+    font-family: 'Oswald', sans-serif;
+    h1{
+        padding: 25px 0;
+    }
 `
 
 export default App;

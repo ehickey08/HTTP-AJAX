@@ -15,12 +15,14 @@ class Friend extends React.Component {
         return (
             <>
                 <FriendDiv>
+                    <div>
                     <FriendSpan>Name: {this.props.friend.name}</FriendSpan>
                     <FriendSpan>Age: {this.props.friend.age}</FriendSpan>
                     <FriendSpan>Email: {this.props.friend.email}</FriendSpan>
-                </FriendDiv>
-                <UpdateButton onClick = {() => this.props.updateForm(this.props.friend)}>Update</UpdateButton>
+                    </div>
+                    <UpdateButton onClick = {() => this.props.updateForm(this.props.friend)}>Update</UpdateButton>
                 <DeleteButton onClick ={(evt) => this.deleteFriend(evt)}>Delete</DeleteButton>
+                </FriendDiv>
             </>
         )
     }
@@ -28,16 +30,33 @@ class Friend extends React.Component {
 
 const FriendDiv = styled.div`
     display: flex;
-    flex-direction: column;
-    margin: 2rem 0;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px auto;
+    width: 35%;
+
+    div{
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+    }
 `
 
 const FriendSpan = styled.span`
-    margin: 0.22rem 0;
+    font size: 20px;
+    font-family: 'Oswald', sans-serif;
 `
 
 const UpdateButton = styled.button`
-
+    height: 30px;
+    background: #0B2818
+    color: white;
+    
+    &:hover{
+        background: rgba(66,94,78, 0.4);
+        font-weight: 600;
+        color: black;
+    }
 `
 
 const DeleteButton = styled(UpdateButton)`
