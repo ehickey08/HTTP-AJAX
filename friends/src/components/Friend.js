@@ -6,7 +6,6 @@ import styled from 'styled-components'
 class Friend extends React.Component {
 
     deleteFriend = e => {
-        console.log(this.props.friend.id)
         e.preventDefault();
         this.props.deleteFriend(this.props.friend.id)
     }

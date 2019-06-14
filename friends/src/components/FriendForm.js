@@ -9,7 +9,7 @@ const FriendForm = props => {
                 props.updateFriend(props.friend)
             else 
                 props.postFriend(props.friend)
-            }}>
+        }}>
             <input
                 type="text"
                 name="name" 

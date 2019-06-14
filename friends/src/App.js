@@ -51,7 +51,6 @@ class App extends React.Component {
     }
 
     updateFriend = friend => {
-        console.log('update')
         axios.put(`http://localhost:5000/friends/${friend.id}`, friend)
             .then(res => {
                 this.setState({
@@ -77,6 +76,10 @@ class App extends React.Component {
     }
 
     render() {
+        console.group('CSS in your console??')
+        console.table(this.state.data)
+        console.log('%c Help', 'color:red; font-size: 20px;')
+        console.log('%cTest','text-decoration: underline; padding-left: 50%;')
         return (
             <AppDiv>
                 <h1>Add, Update, and Delete Your Friends!</h1>
@@ -86,12 +89,14 @@ class App extends React.Component {
                     updateFriend = {this.updateFriend}
                     friends = {this.state.data}
                     friend = {this.state.friend}
+                />
+                {this.state.data.map(friend => 
+                    <Friend  
+                        updateForm = {this.updateForm} 
+                        deleteFriend = {this.deleteFriend} 
+                        friend = {friend} 
                     />
-                    {this.state.data.map(friend => 
-                        <Friend  
-                            updateForm = {this.updateForm} 
-                            deleteFriend = {this.deleteFriend} 
-                            friend = {friend} />)}
+                )}
             </AppDiv>
         );
     }
